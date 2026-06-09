@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand */
+  --color-primary: #5d5fef;
+  --color-primary-dark: #4b4ddb;
+  --color-primary-light: #ececfe;
+
+  /* Surfaces */
+  --color-canvas: #f5f6fa;
+  --color-card: #ffffff;
+  --color-line: #eef0f5;
+
+  /* Text */
+  --color-ink: #25253c;
+  --color-ink-soft: #5a5a72;
+  --color-muted: #9094b0;
+
+  /* Status / accents */
+  --color-success: #2eb67d;
+  --color-success-soft: #e4f7ef;
+  --color-warning: #f5a623;
+  --color-warning-soft: #fdf1dc;
+  --color-danger: #ff5c71;
+  --color-danger-soft: #ffe6ea;
+  --color-info: #1fc8db;
+  --color-info-soft: #def8fb;
+
+  /* Chart palette */
+  --color-chart-blue: #4d8dff;
+  --color-chart-orange: #ff8b6b;
+  --color-chart-amber: #ffc542;
+  --color-chart-purple: #a66bff;
+  --color-chart-pink: #ff6bcb;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-canvas);
+  --foreground: var(--color-ink);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Thin, subtle scrollbars to match the dashboard aesthetic */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d7d9e6 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #d7d9e6;
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out both;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Print: show only the invoice preview. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #invoice-preview,
+  #invoice-preview * {
+    visibility: visible;
+  }
+  #invoice-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+    ring: 0 !important;
+  }
 }

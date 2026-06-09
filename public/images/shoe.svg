@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" rx="16" fill="#eef2fb"/>
+  <!-- sneaker -->
+  <path d="M30 128 c8-4 18-6 26-14 l18-18 c4-4 10-3 12 2 l6 14 c10 2 30 6 56 22 c10 6 18 10 18 18 c0 6-4 10-12 10 H40 c-10 0-16-4-16-12 c0-8 2-16 6-22 z" fill="#2b2f45"/>
+  <path d="M30 128 c8-4 18-6 26-14 l18-18 c4-4 10-3 12 2 l4 10 c-12 10-22 22-30 34 H38 c-6 0-10-2-12-4 z" fill="#3a3f5c"/>
+  <path d="M84 96 l8 18 m6 -8 l10 16 m8 -10 l12 16" stroke="#cdd6f5" stroke-width="3" stroke-linecap="round"/>
+  <rect x="34" y="150" width="138" height="12" rx="6" fill="#ffffff"/>
+  <path d="M48 116 c14 6 26 6 40 2" stroke="#ff6b6b" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>
