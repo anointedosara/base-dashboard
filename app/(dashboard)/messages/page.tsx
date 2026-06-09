@@ -46,9 +46,9 @@ export default function MessagesPage() {
     getAuthSnapshot() ? [{ name: ADMIN, preview: welcomeText(), time: "now", online: true, type: "personal" }] : [],
   );
   const [messages, setMessages] = useState<Record<string, Msg[]>>(() => {
-    if (!getAuthSnapshot()) return {};
-    const msg: Msg = { from: "them", type: "text", text: welcomeText(), time: "now" };
-    return { [ADMIN]: [msg] };
+    const init: Record<string, Msg[]> = {};
+    if (getAuthSnapshot()) init[ADMIN] = [{ from: "them", type: "text", text: welcomeText(), time: "now" }];
+    return init;
   });
   const [active, setActive] = useState<string | null>(null);
   const [tab, setTab] = useState<(typeof TABS)[number]>("All");
