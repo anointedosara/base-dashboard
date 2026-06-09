@@ -4,6 +4,7 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { subscribeUnread, getUnreadSnapshot, getUnreadServerSnapshot } from "@/lib/messageStore";
+import { subscribeNotifs, getNotifsSnapshot, getNotifsServerSnapshot } from "@/lib/notificationStore";
 import { subscribeAuth, getAuthSnapshot, getAuthServerSnapshot, logout } from "@/lib/auth";
 import { useHydrated } from "@/lib/useHydrated";
 import { cn } from "@/lib/cn";
@@ -38,6 +39,8 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const unread = useSyncExternalStore(subscribeUnread, getUnreadSnapshot, getUnreadServerSnapshot);
+  const notifs = useSyncExternalStore(subscribeNotifs, getNotifsSnapshot, getNotifsServerSnapshot);
+  const notifUnread = notifs.filter((n) => n.unread).length;
   const account = useSyncExternalStore(subscribeAuth, getAuthSnapshot, getAuthServerSnapshot);
   const name = account?.fullName ?? USER.name;
   const plan = account?.plan ?? USER.plan;
@@ -52,7 +55,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
       <nav className="flex-1 space-y-1 overflow-y-auto px-4">
         {NAV.map(({ label, href, Icon }) => {
           const active = pathname === href || pathname.startsWith(href + "/");
-          const badge = href === "/messages" && unread > 0 ? unread : undefined;
+          const badge =
+            href === "/messages" && unread > 0
+              ? unread
+              : href === "/notification" && notifUnread > 0
+                ? notifUnread
+                : undefined;
           return (
             <Link
               key={href}

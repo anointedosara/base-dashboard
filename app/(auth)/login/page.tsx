@@ -10,6 +10,7 @@ import { SocialButtons, Divider } from "@/components/AuthBits";
 import { EyeIcon, EyeOffIcon } from "@/components/Icons";
 import { login } from "@/lib/auth";
 import { notify, clearNotifs } from "@/lib/notificationStore";
+import { addUnread } from "@/lib/messageStore";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function LoginPage() {
     }
     clearNotifs();
     notify("You logged in successfully");
+    addUnread(1); // the admin welcome message is waiting
     router.push("/dashboard");
   };
 

@@ -26,8 +26,9 @@ export function getNotifsServerSnapshot(): Notif[] {
   return EMPTY;
 }
 
-/** Record a change. `action` describes what was done, e.g. `Created invoice #876370`. */
-export function notify(action: string, actor = "You") {
+/** Record a change. `action` describes what was done, e.g. `Created invoice #876370`.
+    Notifications are delivered by the admin by default. */
+export function notify(action: string, actor = "Base Admin") {
   cache = [{ id: seq++, actor, action, time: "Just now", unread: true }, ...cache];
   emit();
 }

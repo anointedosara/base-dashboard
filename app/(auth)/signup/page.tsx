@@ -10,6 +10,7 @@ import { SocialButtons, Divider } from "@/components/AuthBits";
 import { EyeIcon, EyeOffIcon } from "@/components/Icons";
 import { register } from "@/lib/auth";
 import { notify, clearNotifs } from "@/lib/notificationStore";
+import { addUnread } from "@/lib/messageStore";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -42,6 +43,7 @@ export default function SignupPage() {
     }
     clearNotifs();
     notify("Welcome to Base — your account was created");
+    addUnread(1); // the admin welcome message is waiting
     router.push("/account-created");
   };
 
